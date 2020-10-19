@@ -9,6 +9,7 @@ public class PotionData
     public string Name;
     public string color;
     public Sprite sprite;
+    public int quantity;
     
 }
 [Serializable]
