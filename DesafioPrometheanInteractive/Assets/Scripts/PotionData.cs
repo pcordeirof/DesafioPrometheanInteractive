@@ -10,6 +10,7 @@ public class PotionData
     public string color;
     public Sprite sprite;
     public int quantity;
+    public string State = "Não-identificada";
     
 }
 [Serializable]
@@ -18,8 +19,9 @@ public class PotionIdentified : PotionData
     public string effectName;
     public string effectDescription;
 
-    public void addEffect(string _IdentifiedName, string _effectName, string _effectDescription)
+    public void addEffect(string _State, string _IdentifiedName, string _effectName, string _effectDescription)
     {
+        State = _State;
         Name = _IdentifiedName;
         effectName = _effectName;
         effectDescription = _effectDescription;
