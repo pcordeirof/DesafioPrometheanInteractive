@@ -7,29 +7,22 @@ public class UsePotion : MonoBehaviour, IPointerClickHandler
 {
     public GameObject Instances;
     public GameObject Potion;
-    void Start()
-    {
-    
-      
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public GameObject PopUp;
+ 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PossiblePotion newPotion = new PossiblePotion();
-        newPotion = Instances.GetComponent<PotionInstance>().PossiblePotions[Random.Range(0, Instances.GetComponent<PotionInstance>().PossiblePotions.Count)];
-        Instances.GetComponent<PotionInstance>().PossiblePotions.Remove(newPotion);
 
         if(Potion.GetComponent<PotionButton>().potion.State != "Identificada")
         {
+            PossiblePotion newPotion = Instances.GetComponent<PotionInstance>().PossiblePotions[Random.Range(0, Instances.GetComponent<PotionInstance>().PossiblePotions.Count)];
+            Instances.GetComponent<PotionInstance>().PossiblePotions.Remove(newPotion);
             Potion.GetComponent<PotionButton>().potion.addEffect("Identificada", newPotion.Name, newPotion.effectName, newPotion.effectDescription);
-            Potion.GetComponent<PotionButton>().potion.quantity -= 1;
+            
+            Potion.GetComponent<PotionButton>().PotionEffect();
 
         }
+        PopUp.SetActive(false);
+        Potion.GetComponent<PotionButton>().potion.quantity --;
+        Potion.GetComponent<PotionButton>().ReduceQuantity();
     }
 }
