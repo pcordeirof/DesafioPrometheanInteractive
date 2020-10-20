@@ -27,7 +27,7 @@ public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Name = this.gameObject.transform.GetChild(0).GetChild(1).gameObject;
         Color = this.gameObject.transform.GetChild(0).GetChild(2).gameObject;
         Effect = this.gameObject.transform.GetChild(0).GetChild(3).gameObject;
-        Quantity = this.gameObject.transform.GetChild(2).gameObject;
+        Quantity = this.gameObject.transform.GetChild(1).gameObject;
         
 
         potion = GetPotion();
@@ -38,9 +38,7 @@ public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Color.GetComponent<Text>().text += " " + potion.color;
         Quantity.GetComponent<Text>().text = potion.quantity.ToString();
         
-        PopUp = this.gameObject.transform.GetChild(1).gameObject;
-        PopUp.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = potion.sprite;
-        PopUp.transform.GetChild(2).gameObject.GetComponent<Text>().text = potion.Name;
+        
     }
     public PotionIdentified GetPotion()
     {
@@ -85,7 +83,10 @@ public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     
     public void OnPointerClick(PointerEventData eventData)
     {
+        PopUp.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = potion.sprite;
+        PopUp.transform.GetChild(2).gameObject.GetComponent<Text>().text = potion.Name;
         PopUp.SetActive(true);
+        PopUp.transform.GetChild(3).gameObject.GetComponent<UsePotion>().getPotion(this.gameObject);
         description.SetActive(false);
     }
 }

@@ -11,7 +11,6 @@ public class UsePotion : MonoBehaviour, IPointerClickHandler
  
     public void OnPointerClick(PointerEventData eventData)
     {
-
         if(Potion.GetComponent<PotionButton>().potion.State != "Identificada")
         {
             PossiblePotion newPotion = Instances.GetComponent<PotionInstance>().PossiblePotions[Random.Range(0, Instances.GetComponent<PotionInstance>().PossiblePotions.Count)];
@@ -24,5 +23,10 @@ public class UsePotion : MonoBehaviour, IPointerClickHandler
         PopUp.SetActive(false);
         Potion.GetComponent<PotionButton>().potion.quantity --;
         Potion.GetComponent<PotionButton>().ReduceQuantity();
+    }
+
+    public void getPotion(GameObject _potion)
+    {
+        Potion = _potion;
     }
 }
