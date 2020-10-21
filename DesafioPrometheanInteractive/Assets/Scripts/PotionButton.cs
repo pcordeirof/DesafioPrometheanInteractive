@@ -6,87 +6,69 @@ using UnityEngine.EventSystems;
 
 public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public PotionIdentified potion;
-    public GameObject Instances;
-    public GameObject description;
-    public GameObject State;
-    public GameObject Name;
-    public GameObject Color;
-    public GameObject Effect;
-    public GameObject Quantity;
-    public GameObject PopUp;
-    public Image image;
+    public PotionAllData potionInstance;
+    public PotionsAvailable potionAvailables;
+    public GameObject potionDescription;
+    public Text potionStateTxt;
+    public Text potionNameTxt;
+    public Text potionColorTxt;
+    public Text potionEffectTxt;
+    public Text potionQuantityTxt;
+    public GameObject PopUpGameObject;
+    public PopUpPotion PopUpClass;
+    public Image potionImage;
     bool pointerOn = false;
     void Start()
-    {
-        image = this.GetComponent<Image>();
-        potion = new PotionIdentified();
-        
-        description = this.gameObject.transform.GetChild(0).gameObject;
-        State = this.gameObject.transform.GetChild(0).GetChild(0).gameObject;
-        Name = this.gameObject.transform.GetChild(0).GetChild(1).gameObject;
-        Color = this.gameObject.transform.GetChild(0).GetChild(2).gameObject;
-        Effect = this.gameObject.transform.GetChild(0).GetChild(3).gameObject;
-        Quantity = this.gameObject.transform.GetChild(1).gameObject;
-        
+    {   
 
-        potion = GetPotion();
+        potionInstance = potionAvailables.GetPotion();
         
-        image.sprite = potion.sprite;
-        State.GetComponent<Text>().text = potion.State;
-        Name.GetComponent<Text>().text = potion.Name;
-        Color.GetComponent<Text>().text += " " + potion.color;
-        Quantity.GetComponent<Text>().text = potion.quantity.ToString();
+        potionImage.sprite = potionInstance.potionSprite;
+        potionStateTxt.text = potionInstance.potionStateTxt;
+        potionNameTxt.text = potionInstance.potionNameTxt;
+        potionColorTxt.text += " " + potionInstance.potionColorTxt;
+        potionQuantityTxt.text = potionInstance.potionQuantity.ToString();
         
         
     }
-    public PotionIdentified GetPotion()
-    {
-        PotionIdentified newPotion = new PotionIdentified();
-        newPotion = Instances.GetComponent<PotionInstance>().Potions[Random.Range(0, Instances.GetComponent<PotionInstance>().Potions.Count)];
-        Instances.GetComponent<PotionInstance>().Potions.Remove(newPotion);
-        return newPotion;
-    }
-
     public void PotionEffect()
     {
-        State.GetComponent<Text>().text = potion.State;
-        Name.GetComponent<Text>().text = potion.Name;
-        Effect.GetComponent<Text>().text += " " + potion.effectName;
-        PopUp.transform.GetChild(2).gameObject.GetComponent<Text>().text = potion.Name;
-        Debug.Log(potion.effectDescription);
+        potionStateTxt.text = potionInstance.potionStateTxt;
+        potionNameTxt.text = potionInstance.potionNameTxt;
+        potionEffectTxt.text += " " + potionInstance.potionEffectName;
+        
+        Debug.Log(potionInstance.potionEffectDescription);
     }
 
     public void ReduceQuantity()
     {
-        if(potion.quantity > 0)
+        potionInstance.potionQuantity --;
+        if(potionInstance.potionQuantity > 0)
         {
-            Quantity.GetComponent<Text>().text = potion.quantity.ToString();
+            potionQuantityTxt.text = potionInstance.potionQuantity.ToString();
         }
         else 
         {
-            Debug.Log(potion.effectDescription);
+            Debug.Log(potionInstance.potionEffectDescription);
             this.gameObject.SetActive(false);
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        pointerOn = PopUp.activeSelf == false ? true : false;
-        description.SetActive(pointerOn);
+        pointerOn = !PopUpGameObject.activeSelf;
+        potionDescription.SetActive(pointerOn);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         pointerOn = false;
-        description.SetActive(pointerOn);
+        potionDescription.SetActive(pointerOn);
     }
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        PopUp.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = potion.sprite;
-        PopUp.transform.GetChild(2).gameObject.GetComponent<Text>().text = potion.Name;
-        PopUp.SetActive(true);
-        PopUp.transform.GetChild(3).gameObject.GetComponent<UsePotion>().getPotion(this.gameObject);
-        description.SetActive(false);
+        PopUpClass.FillInfo(potionInstance, this);
+        PopUpGameObject.SetActive(true);
+        potionDescription.SetActive(false);
     }
 }

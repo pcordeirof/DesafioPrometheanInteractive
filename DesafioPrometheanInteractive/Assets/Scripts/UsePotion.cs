@@ -5,28 +5,27 @@ using UnityEngine.EventSystems;
 
 public class UsePotion : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject Instances;
-    public GameObject Potion;
+    public PotionsAvailable potionsAvailable;
+    public PotionAllData potionInstance;
+    public PotionButton potionButton;
     public GameObject PopUp;
  
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(Potion.GetComponent<PotionButton>().potion.State != "Identificada")
+        if(potionInstance.potionStateBool == false)
         {
-            PossiblePotion newPotion = Instances.GetComponent<PotionInstance>().PossiblePotions[Random.Range(0, Instances.GetComponent<PotionInstance>().PossiblePotions.Count)];
-            Instances.GetComponent<PotionInstance>().PossiblePotions.Remove(newPotion);
-            Potion.GetComponent<PotionButton>().potion.addEffect("Identificada", newPotion.Name, newPotion.effectName, newPotion.effectDescription);
+            PotionEffects newEffect = potionsAvailable.GetEffects();
+            potionInstance.addEffect("Identificada", newEffect.potionNameTxt, newEffect.potionEffectName, newEffect.potionEffectDescription);
             
-            Potion.GetComponent<PotionButton>().PotionEffect();
-
+            potionButton.PotionEffect();
         }
         PopUp.SetActive(false);
-        Potion.GetComponent<PotionButton>().potion.quantity --;
-        Potion.GetComponent<PotionButton>().ReduceQuantity();
+        potionButton.ReduceQuantity();
     }
 
-    public void getPotion(GameObject _potion)
+    public void getPotion(PotionAllData _potion, PotionButton _potionButton)
     {
-        Potion = _potion;
+        potionInstance = _potion;
+        potionButton = _potionButton;
     }
 }
