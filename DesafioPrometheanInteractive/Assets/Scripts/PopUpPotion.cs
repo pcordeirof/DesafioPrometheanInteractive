@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class PopUpPotion : MonoBehaviour
 {
-    public Image popUpImage;
-    public Text popUpTxt;
-    public UsePotion usePotion;
+    [SerializeField] private Image popUpImage;
+    [SerializeField] private Text popUpTxt;
+    [SerializeField] private UsePotion usePotion;
 
     public void FillInfo(PotionAllData _potionInstance, PotionButton _potionButton)
     {

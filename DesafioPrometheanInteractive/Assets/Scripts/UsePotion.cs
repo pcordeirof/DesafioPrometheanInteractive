@@ -5,10 +5,10 @@ using UnityEngine.EventSystems;
 
 public class UsePotion : MonoBehaviour, IPointerClickHandler
 {
-    public PotionsAvailable potionsAvailable;
-    public PotionAllData potionInstance;
-    public PotionButton potionButton;
-    public GameObject PopUp;
+    [SerializeField] private PotionsAvailable potionsAvailable;
+    [SerializeField] private PotionAllData potionInstance;
+    [SerializeField] private PotionButton potionButton;
+    [SerializeField] private GameObject PopUp;
     [SerializeField] private AudioClip useSfx;
     [SerializeField] private AudioSource sfxAudioSource;
  

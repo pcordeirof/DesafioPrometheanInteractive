@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public GameObject inventory;
-    public bool state = false;
+    [SerializeField] private GameObject inventory;
+    [SerializeField] private bool state = false;
     [SerializeField] private AudioClip openSfx;
     [SerializeField] private AudioSource sfxAudioSource;
     void Start()

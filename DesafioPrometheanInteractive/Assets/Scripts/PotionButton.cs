@@ -6,17 +6,17 @@ using UnityEngine.EventSystems;
 
 public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public PotionAllData potionInstance;
-    public PotionsAvailable potionAvailables;
-    public GameObject potionDescription;
-    public Text potionStateTxt;
-    public Text potionNameTxt;
-    public Text potionColorTxt;
-    public Text potionEffectTxt;
-    public Text potionQuantityTxt;
-    public GameObject PopUpGameObject;
-    public PopUpPotion PopUpClass;
-    public Image potionImage;
+    [SerializeField] private PotionAllData potionInstance;
+    [SerializeField] private PotionsAvailable potionAvailables;
+    [SerializeField] private GameObject potionDescription;
+    [SerializeField] private Text potionStateTxt;
+    [SerializeField] private Text potionNameTxt;
+    [SerializeField] private Text potionColorTxt;
+    [SerializeField] private Text potionEffectTxt;
+    [SerializeField] private Text potionQuantityTxt;
+    [SerializeField] private GameObject PopUpGameObject;
+    [SerializeField] private PopUpPotion PopUpClass;
+    [SerializeField] private Image potionImage;
     bool pointerOn = false;
     [SerializeField] private AudioClip hoverSfx;
     [SerializeField] private AudioClip clickSfx;
