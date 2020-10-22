@@ -6,6 +6,8 @@ public class Inventory : MonoBehaviour
 {
     public GameObject inventory;
     public bool state = false;
+    [SerializeField] private AudioClip openSfx;
+    [SerializeField] private AudioSource sfxAudioSource;
     void Start()
     {
         inventory.SetActive(state);
@@ -18,6 +20,7 @@ public class Inventory : MonoBehaviour
         {
             state = !state;
             inventory.SetActive(state);
+            sfxAudioSource.PlayOneShot(openSfx);
         }
     }
     

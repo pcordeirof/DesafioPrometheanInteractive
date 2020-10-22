@@ -18,6 +18,10 @@ public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public PopUpPotion PopUpClass;
     public Image potionImage;
     bool pointerOn = false;
+    [SerializeField] private AudioClip hoverSfx;
+    [SerializeField] private AudioClip clickSfx;
+    [SerializeField] private AudioSource sfxAudioSource;
+    
     void Start()
     {   
 
@@ -55,8 +59,13 @@ public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        pointerOn = !PopUpGameObject.activeSelf;
-        potionDescription.SetActive(pointerOn);
+        if(PopUpGameObject.activeSelf != true)
+        {
+            pointerOn = true;
+            potionDescription.SetActive(pointerOn);
+            sfxAudioSource.PlayOneShot(hoverSfx);
+        }
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -70,5 +79,6 @@ public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         PopUpClass.FillInfo(potionInstance, this);
         PopUpGameObject.SetActive(true);
         potionDescription.SetActive(false);
+        sfxAudioSource.PlayOneShot(clickSfx);
     }
 }

@@ -9,6 +9,8 @@ public class UsePotion : MonoBehaviour, IPointerClickHandler
     public PotionAllData potionInstance;
     public PotionButton potionButton;
     public GameObject PopUp;
+    [SerializeField] private AudioClip useSfx;
+    [SerializeField] private AudioSource sfxAudioSource;
  
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -21,6 +23,7 @@ public class UsePotion : MonoBehaviour, IPointerClickHandler
         }
         PopUp.SetActive(false);
         potionButton.ReduceQuantity();
+        sfxAudioSource.PlayOneShot(useSfx);
     }
 
     public void getPotion(PotionAllData _potion, PotionButton _potionButton)
