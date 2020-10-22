@@ -7,17 +7,15 @@ using UnityEngine.EventSystems;
 public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private PotionAllData potionInstance;
-    [SerializeField] private PotionsAvailable potionAvailables;
+    [SerializeField] private PotionsAvailable availablePotions;
     [SerializeField] private GameObject potionDescription;
     [SerializeField] private Text potionStateTxt;
     [SerializeField] private Text potionNameTxt;
     [SerializeField] private Text potionColorTxt;
-    [SerializeField] private Text potionEffectTxt;
+    [SerializeField] private Text potionEffectName;
     [SerializeField] private Text potionQuantityTxt;
-    [SerializeField] private GameObject PopUpGameObject;
-    [SerializeField] private PopUpPotion PopUpClass;
+    [SerializeField] private PopUpPotion PopUpPotion;
     [SerializeField] private Image potionImage;
-    bool pointerOn = false;
     [SerializeField] private AudioClip hoverSfx;
     [SerializeField] private AudioClip clickSfx;
     [SerializeField] private AudioSource sfxAudioSource;
@@ -25,21 +23,21 @@ public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     void Start()
     {   
 
-        potionInstance = potionAvailables.GetPotion();
+        potionInstance = availablePotions.GetPotion();
         
         potionImage.sprite = potionInstance.potionSprite;
-        potionStateTxt.text = potionInstance.potionStateTxt;
-        potionNameTxt.text = potionInstance.potionNameTxt;
-        potionColorTxt.text += " " + potionInstance.potionColorTxt;
+        potionStateTxt.text = potionInstance.potionState;
+        potionNameTxt.text = potionInstance.potionName;
+        potionColorTxt.text += " " + potionInstance.potionColor;
         potionQuantityTxt.text = potionInstance.potionQuantity.ToString();
         
         
     }
-    public void PotionEffect()
+    public void AttributePotionEffect()
     {
-        potionStateTxt.text = potionInstance.potionStateTxt;
-        potionNameTxt.text = potionInstance.potionNameTxt;
-        potionEffectTxt.text += " " + potionInstance.potionEffectName;
+        potionStateTxt.text = potionInstance.potionState;
+        potionNameTxt.text = potionInstance.potionName;
+        potionEffectName.text += " " + potionInstance.potionEffectName;
         
         Debug.Log(potionInstance.potionEffectDescription);
     }
@@ -59,10 +57,9 @@ public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(PopUpGameObject.activeSelf != true)
+        if(PopUpPotion.popUp.activeSelf == false)
         {
-            pointerOn = true;
-            potionDescription.SetActive(pointerOn);
+            potionDescription.SetActive(true);
             sfxAudioSource.PlayOneShot(hoverSfx);
         }
         
@@ -70,14 +67,12 @@ public class PotionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        pointerOn = false;
-        potionDescription.SetActive(pointerOn);
+        potionDescription.SetActive(false);
     }
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        PopUpClass.FillInfo(potionInstance, this);
-        PopUpGameObject.SetActive(true);
+        PopUpPotion.OnDisplay(potionInstance, this);
         potionDescription.SetActive(false);
         sfxAudioSource.PlayOneShot(clickSfx);
     }

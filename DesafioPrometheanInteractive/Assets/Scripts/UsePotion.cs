@@ -14,19 +14,19 @@ public class UsePotion : MonoBehaviour, IPointerClickHandler
  
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(potionInstance.potionStateBool == false)
+        if(potionInstance.isIdentified == false)
         {
             PotionEffects newEffect = potionsAvailable.GetEffects();
-            potionInstance.addEffect("Identificada", newEffect.potionNameTxt, newEffect.potionEffectName, newEffect.potionEffectDescription);
+            potionInstance.AddEffect("Identificada", newEffect.potionNameTxt, newEffect.potionEffectName, newEffect.potionEffectDescription);
             
-            potionButton.PotionEffect();
+            potionButton.AttributePotionEffect();
         }
         PopUp.SetActive(false);
         potionButton.ReduceQuantity();
         sfxAudioSource.PlayOneShot(useSfx);
     }
 
-    public void getPotion(PotionAllData _potion, PotionButton _potionButton)
+    public void GetPotion(PotionAllData _potion, PotionButton _potionButton)
     {
         potionInstance = _potion;
         potionButton = _potionButton;

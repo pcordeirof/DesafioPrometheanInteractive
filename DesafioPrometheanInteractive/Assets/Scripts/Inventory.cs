@@ -5,12 +5,12 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private GameObject inventory;
-    [SerializeField] private bool state = false;
+    [SerializeField] private bool isActive = false;
     [SerializeField] private AudioClip openSfx;
     [SerializeField] private AudioSource sfxAudioSource;
     void Start()
     {
-        inventory.SetActive(state);
+        inventory.SetActive(isActive);
         
     }
 
@@ -18,8 +18,8 @@ public class Inventory : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
-            state = !state;
-            inventory.SetActive(state);
+            isActive = !isActive;
+            inventory.SetActive(isActive);
             sfxAudioSource.PlayOneShot(openSfx);
         }
     }

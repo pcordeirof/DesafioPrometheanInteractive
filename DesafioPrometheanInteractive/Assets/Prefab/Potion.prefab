@@ -134,23 +134,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionInstance:
-    potionNameTxt: 
-    potionColorTxt: 
+    potionName: 
+    potionColor: 
     potionSprite: {fileID: 0}
     potionQuantity: 0
-    potionStateTxt: "N\xE3o-identificada"
-    potionStateBool: 0
+    potionState: "N\xE3o-identificada"
+    isIdentified: 0
     potionEffectName: 
     potionEffectDescription: 
-  potionAvailables: {fileID: 0}
+  availablePotions: {fileID: 0}
   potionDescription: {fileID: 7761692076892925497}
   potionStateTxt: {fileID: 7761692078304554352}
   potionNameTxt: {fileID: 7761692077980327421}
   potionColorTxt: {fileID: 7761692077056728270}
-  potionEffectTxt: {fileID: 7761692077729003645}
+  potionEffectName: {fileID: 7761692077729003645}
   potionQuantityTxt: {fileID: 7761692077541479386}
-  PopUpGameObject: {fileID: 0}
-  PopUpClass: {fileID: 0}
+  PopUpPotion: {fileID: 0}
   potionImage: {fileID: 7761692076724518976}
   hoverSfx: {fileID: 8300000, guid: 96fc9ea8c8eb94268b28b77324f1ad8c, type: 3}
   clickSfx: {fileID: 8300000, guid: 216a5e68b919842cc9a216a4afaeefe5, type: 3}

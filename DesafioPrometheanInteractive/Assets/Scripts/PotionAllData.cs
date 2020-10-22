@@ -6,22 +6,22 @@ using System;
 [Serializable]
 public class PotionAllData
 {
-    public string potionNameTxt;
-    public string potionColorTxt;
+    public string potionName;
+    public string potionColor;
     public Sprite potionSprite;
     public int potionQuantity;
-    public string potionStateTxt = "Não-identificada";
-    public bool potionStateBool = false;
+    public string potionState = "Não-identificada";
+    public bool isIdentified = false;
     public string potionEffectName;
     public string potionEffectDescription;
 
-    public void addEffect(string _State, string _IdentifiedName, string _effectName, string _effectDescription)
+    public void AddEffect(string _potionState, string _identifiedName, string _potionEffectName, string _potionEffectDescription)
     {
-        potionStateTxt = _State;
-        potionNameTxt = _IdentifiedName;
-        potionEffectName = _effectName;
-        potionEffectDescription = _effectDescription;
-        potionStateBool = true;
+        potionState = _potionState;
+        potionName = _identifiedName;
+        potionEffectName = _potionEffectName;
+        potionEffectDescription = _potionEffectDescription;
+        isIdentified = true;
     }
 
 }
